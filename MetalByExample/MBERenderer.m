@@ -8,28 +8,19 @@
 
 #import "MBERenderer.h"
 #import "MBEMathUtilities.h"
+#import "MBEOBJModel.h"
+#import "MBEOBJGroup.h"
+#import "MBEOBJMesh.h"
+#import "MBETypes.h"
 @import Metal;
 @import simd;
 
 static const NSInteger MBEInFlightBufferCount = 3;
 
-typedef struct {
-  vector_float4 position;
-  vector_float4 color;
-} MBEVertex;
-
-typedef uint16_t MBEIndex;
-const MTLIndexType MBEIndexType = MTLIndexTypeUInt16;
-
-typedef struct {
-  matrix_float4x4 modelViewProjectionMatrix;
-} MBEUniforms;
-
 @interface MBERenderer ()
 
 @property (nonatomic, strong) id<MTLDevice> device;
-@property (nonatomic, strong) id<MTLBuffer> vertexBuffer;
-@property (nonatomic, strong) id<MTLBuffer> indexBuffer;
+@property (nonatomic, strong) MBEMesh *mesh;
 @property (nonatomic, strong) id<MTLBuffer> uniformBuffer;
 @property (nonatomic, strong) id<MTLRenderPipelineState> pipeline;
 @property (nonatomic, strong) id<MTLCommandQueue> commandQueue;
@@ -47,7 +38,7 @@ typedef struct {
   if (self) {
     [self makeDevice];
     _displaySemaphore = dispatch_semaphore_create(MBEInFlightBufferCount);
-    [self makeBuffers];
+    [self makeResources];
     [self makePipeline];
   }
   return self;
@@ -57,7 +48,7 @@ typedef struct {
   self.time += duration;
   self.rotationX += duration * (M_PI / 2);
   self.rotationY += duration * (M_PI / 3);
-  float scaleFactor = sinf(5 * self.time) * 0.25 + 1;
+  float scaleFactor = 1;
   const vector_float3 xAxis = { 1, 0, 0 };
   const vector_float3 yAxis = { 0, 1, 0 };
   const matrix_float4x4 xRot = matrix_float4x4_rotation(xAxis, self.rotationX);
@@ -65,19 +56,21 @@ typedef struct {
   const matrix_float4x4 scale = matrix_float4x4_uniform_scale(scaleFactor);
   const matrix_float4x4 modelMatrix = matrix_multiply(matrix_multiply(xRot, yRot), scale);
   
-  const vector_float3 cameraTranslation = { 0, 0, -5 };
+  const vector_float3 cameraTranslation = { 0, 0, -1.5 };
   const matrix_float4x4 viewMatrix = matrix_float4x4_translation(cameraTranslation);
   
   const CGSize drawableSize = view.metalLayer.drawableSize;
   const float aspect = drawableSize.width / drawableSize.height;
   const float fov = (2 * M_PI) / 5;
-  const float near = 1;
+  const float near = 0.1;
   const float far = 100;
   const matrix_float4x4 projectionMatrix = matrix_float4x4_perspective(aspect, fov, near, far);
   
   MBEUniforms uniforms;
-  uniforms.modelViewProjectionMatrix = matrix_multiply(projectionMatrix, matrix_multiply(viewMatrix, modelMatrix));
-  
+  uniforms.modelViewMatrix = matrix_multiply(viewMatrix, modelMatrix);
+  uniforms.modelViewProjectionMatrix = matrix_multiply(projectionMatrix, uniforms.modelViewMatrix);
+  uniforms.normalMatrix = matrix_float4x4_extract_linear(uniforms.modelViewMatrix);
+
   const NSUInteger uniformBufferOffset = sizeof(MBEUniforms) * self.bufferIndex;
   memcpy([self.uniformBuffer contents] + uniformBufferOffset, &uniforms, sizeof(uniforms));
 }
@@ -100,14 +93,14 @@ typedef struct {
   [renderPass setCullMode:MTLCullModeBack];
   
   const NSUInteger uniformBufferOffset = sizeof(MBEUniforms) * self.bufferIndex;
-  
-  [renderPass setVertexBuffer:self.vertexBuffer offset:0 atIndex:0];
   [renderPass setVertexBuffer:self.uniformBuffer offset:uniformBufferOffset atIndex:1];
+
+  [renderPass setVertexBuffer:self.mesh.vertexBuffer offset:0 atIndex:0];
   
   [renderPass drawIndexedPrimitives:MTLPrimitiveTypeTriangle
-                         indexCount:[self.indexBuffer length] / sizeof(MBEIndex)
+                         indexCount:[self.mesh.indexBuffer length] / sizeof(MBEIndex)
                           indexType:MBEIndexType
-                        indexBuffer:self.indexBuffer
+                        indexBuffer:self.mesh.indexBuffer
                   indexBufferOffset:0];
 
   [renderPass endEncoding];
@@ -126,48 +119,20 @@ typedef struct {
   _device = MTLCreateSystemDefaultDevice();
 }
 
-- (void)makeBuffers {
-  static const MBEVertex vertices[] =
-  {
-    { .position = { -1,  1,  1, 1 }, .color = { 0, 1, 1, 1 } },
-    { .position = { -1, -1,  1, 1 }, .color = { 0, 0, 1, 1 } },
-    { .position = {  1, -1,  1, 1 }, .color = { 1, 0, 1, 1 } },
-    { .position = {  1,  1,  1, 1 }, .color = { 1, 1, 1, 1 } },
-    { .position = { -1,  1, -1, 1 }, .color = { 0, 1, 0, 1 } },
-    { .position = { -1, -1, -1, 1 }, .color = { 0, 0, 0, 1 } },
-    { .position = {  1, -1, -1, 1 }, .color = { 1, 0, 0, 1 } },
-    { .position = {  1,  1, -1, 1 }, .color = { 1, 1, 0, 1 } }
-  };
-  
-  static const MBEIndex indices[] =
-  {
-    3, 2, 6, 6, 7, 3,
-    4, 5, 1, 1, 0, 4,
-    4, 0, 3, 3, 7, 4,
-    1, 5, 6, 6, 2, 1,
-    0, 1, 2, 2, 3, 0,
-    7, 6, 5, 5, 4, 7
-  };
-  
-  self.vertexBuffer = [self.device newBufferWithBytes:vertices
-                                               length:sizeof(vertices)
-                                              options:MTLResourceCPUCacheModeDefaultCache];
-  self.vertexBuffer.label = @"Vertices";
-  
-  self.indexBuffer = [self.device newBufferWithBytes:indices
-                                              length:sizeof(indices)
-                                             options:MTLResourceOptionCPUCacheModeDefault];
-  self.indexBuffer.label = @"Indices";
-  
+- (void)makeResources {
+  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"teapot" withExtension:@"obj"];
+  MBEOBJModel *model = [[MBEOBJModel alloc] initWithContentsOfURL:modelURL generateNormals:YES];
+  MBEOBJGroup *group = [model groupForName:@"teapot"];
+  self.mesh = [[MBEOBJMesh alloc] initWithGroup:group device:self.device];
   self.uniformBuffer = [self.device newBufferWithLength:sizeof(MBEUniforms) * MBEInFlightBufferCount
-                                                  options:MTLResourceOptionCPUCacheModeDefault];
+                                                options:MTLResourceOptionCPUCacheModeDefault];
   self.uniformBuffer.label = @"Uniforms";
 }
 
 - (void)makePipeline {
   id<MTLLibrary> library = [self.device newDefaultLibrary];
   id<MTLFunction> vertexFunc = [library newFunctionWithName:@"vertex_project"];
-  id<MTLFunction> fragmentFunc = [library newFunctionWithName:@"fragment_flatcolor"];
+  id<MTLFunction> fragmentFunc = [library newFunctionWithName:@"fragment_light"];
   
   MTLRenderPipelineDescriptor *pipelineDescriptor = [MTLRenderPipelineDescriptor new];
   pipelineDescriptor.vertexFunction = vertexFunc;

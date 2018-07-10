@@ -17,6 +17,11 @@
 		402C461220F4C4A10093412B /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 402C461120F4C4A10093412B /* Shaders.metal */; };
 		402C461720F4C8990093412B /* MBEMathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C461320F4C8990093412B /* MBEMathUtilities.m */; };
 		402C461820F4C8990093412B /* MBERenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C461620F4C8990093412B /* MBERenderer.m */; };
+		402C462320F4E6FE0093412B /* teapot.obj in Resources */ = {isa = PBXBuildFile; fileRef = 402C461A20F4E6FD0093412B /* teapot.obj */; };
+		402C462420F4E6FE0093412B /* MBEOBJMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C461D20F4E6FD0093412B /* MBEOBJMesh.m */; };
+		402C462520F4E6FE0093412B /* MBEOBJGroup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 402C461E20F4E6FD0093412B /* MBEOBJGroup.mm */; };
+		402C462620F4E6FE0093412B /* MBEMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C461F20F4E6FD0093412B /* MBEMesh.m */; };
+		402C462720F4E6FE0093412B /* MBEOBJModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 402C462220F4E6FD0093412B /* MBEOBJModel.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +42,16 @@
 		402C461420F4C8990093412B /* MBERenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBERenderer.h; sourceTree = "<group>"; };
 		402C461520F4C8990093412B /* MBEMathUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEMathUtilities.h; sourceTree = "<group>"; };
 		402C461620F4C8990093412B /* MBERenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBERenderer.m; sourceTree = "<group>"; };
+		402C461920F4E6FC0093412B /* MBEOBJGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEOBJGroup.h; sourceTree = "<group>"; };
+		402C461A20F4E6FD0093412B /* teapot.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = teapot.obj; sourceTree = "<group>"; };
+		402C461B20F4E6FD0093412B /* MBEOBJMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEOBJMesh.h; sourceTree = "<group>"; };
+		402C461C20F4E6FD0093412B /* MBEOBJModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEOBJModel.h; sourceTree = "<group>"; };
+		402C461D20F4E6FD0093412B /* MBEOBJMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBEOBJMesh.m; sourceTree = "<group>"; };
+		402C461E20F4E6FD0093412B /* MBEOBJGroup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MBEOBJGroup.mm; sourceTree = "<group>"; };
+		402C461F20F4E6FD0093412B /* MBEMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBEMesh.m; sourceTree = "<group>"; };
+		402C462020F4E6FD0093412B /* MBEMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEMesh.h; sourceTree = "<group>"; };
+		402C462120F4E6FD0093412B /* MBETypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBETypes.h; sourceTree = "<group>"; };
+		402C462220F4E6FD0093412B /* MBEOBJModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MBEOBJModel.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +84,16 @@
 		402C45EF20F4AA3D0093412B /* MetalByExample */ = {
 			isa = PBXGroup;
 			children = (
+				402C462020F4E6FD0093412B /* MBEMesh.h */,
+				402C461F20F4E6FD0093412B /* MBEMesh.m */,
+				402C461920F4E6FC0093412B /* MBEOBJGroup.h */,
+				402C461E20F4E6FD0093412B /* MBEOBJGroup.mm */,
+				402C461B20F4E6FD0093412B /* MBEOBJMesh.h */,
+				402C461D20F4E6FD0093412B /* MBEOBJMesh.m */,
+				402C461C20F4E6FD0093412B /* MBEOBJModel.h */,
+				402C462220F4E6FD0093412B /* MBEOBJModel.mm */,
+				402C462120F4E6FD0093412B /* MBETypes.h */,
+				402C461A20F4E6FD0093412B /* teapot.obj */,
 				402C461520F4C8990093412B /* MBEMathUtilities.h */,
 				402C461320F4C8990093412B /* MBEMathUtilities.m */,
 				402C461420F4C8990093412B /* MBERenderer.h */,
@@ -146,6 +171,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				402C462320F4E6FE0093412B /* teapot.obj in Resources */,
 				402C45FD20F4AA3E0093412B /* LaunchScreen.storyboard in Resources */,
 				402C45FA20F4AA3E0093412B /* Assets.xcassets in Resources */,
 				402C45F820F4AA3D0093412B /* Main.storyboard in Resources */,
@@ -162,10 +188,14 @@
 				402C45F520F4AA3D0093412B /* ViewController.m in Sources */,
 				402C461720F4C8990093412B /* MBEMathUtilities.m in Sources */,
 				402C460020F4AA3E0093412B /* main.m in Sources */,
+				402C462420F4E6FE0093412B /* MBEOBJMesh.m in Sources */,
+				402C462720F4E6FE0093412B /* MBEOBJModel.mm in Sources */,
 				402C45F220F4AA3D0093412B /* AppDelegate.m in Sources */,
+				402C462520F4E6FE0093412B /* MBEOBJGroup.mm in Sources */,
 				402C461820F4C8990093412B /* MBERenderer.m in Sources */,
 				402C460820F4AC7D0093412B /* MBEMetalView.m in Sources */,
 				402C461220F4C4A10093412B /* Shaders.metal in Sources */,
+				402C462620F4E6FE0093412B /* MBEMesh.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
