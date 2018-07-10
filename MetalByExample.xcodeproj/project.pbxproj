@@ -15,6 +15,8 @@
 		402C460020F4AA3E0093412B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C45FF20F4AA3E0093412B /* main.m */; };
 		402C460820F4AC7D0093412B /* MBEMetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C460720F4AC7D0093412B /* MBEMetalView.m */; };
 		402C461220F4C4A10093412B /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 402C461120F4C4A10093412B /* Shaders.metal */; };
+		402C461720F4C8990093412B /* MBEMathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C461320F4C8990093412B /* MBEMathUtilities.m */; };
+		402C461820F4C8990093412B /* MBERenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C461620F4C8990093412B /* MBERenderer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,10 @@
 		402C460620F4AC7D0093412B /* MBEMetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBEMetalView.h; sourceTree = "<group>"; };
 		402C460720F4AC7D0093412B /* MBEMetalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBEMetalView.m; sourceTree = "<group>"; };
 		402C461120F4C4A10093412B /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		402C461320F4C8990093412B /* MBEMathUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBEMathUtilities.m; sourceTree = "<group>"; };
+		402C461420F4C8990093412B /* MBERenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBERenderer.h; sourceTree = "<group>"; };
+		402C461520F4C8990093412B /* MBEMathUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEMathUtilities.h; sourceTree = "<group>"; };
+		402C461620F4C8990093412B /* MBERenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBERenderer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,10 @@
 		402C45EF20F4AA3D0093412B /* MetalByExample */ = {
 			isa = PBXGroup;
 			children = (
+				402C461520F4C8990093412B /* MBEMathUtilities.h */,
+				402C461320F4C8990093412B /* MBEMathUtilities.m */,
+				402C461420F4C8990093412B /* MBERenderer.h */,
+				402C461620F4C8990093412B /* MBERenderer.m */,
 				402C45F020F4AA3D0093412B /* AppDelegate.h */,
 				402C45F120F4AA3D0093412B /* AppDelegate.m */,
 				402C45F320F4AA3D0093412B /* ViewController.h */,
@@ -150,8 +160,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				402C45F520F4AA3D0093412B /* ViewController.m in Sources */,
+				402C461720F4C8990093412B /* MBEMathUtilities.m in Sources */,
 				402C460020F4AA3E0093412B /* main.m in Sources */,
 				402C45F220F4AA3D0093412B /* AppDelegate.m in Sources */,
+				402C461820F4C8990093412B /* MBERenderer.m in Sources */,
 				402C460820F4AC7D0093412B /* MBEMetalView.m in Sources */,
 				402C461220F4C4A10093412B /* Shaders.metal in Sources */,
 			);

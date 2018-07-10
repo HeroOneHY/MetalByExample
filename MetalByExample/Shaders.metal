@@ -1,12 +1,5 @@
-//
-//  Shaders.metal
-//  MetalByExample
-//
-//  Created by Dan Jiang on 2018/7/10.
-//  Copyright © 2018年 Dan Jiang. All rights reserved.
-//
-
 #include <metal_stdlib>
+
 using namespace metal;
 
 struct Vertex
@@ -15,13 +8,23 @@ struct Vertex
   float4 color;
 };
 
-vertex Vertex vertex_main(device Vertex *vertices [[buffer(0)]],
-                          uint vid [[vertex_id]])
+struct Uniforms
 {
-  return vertices[vid];
+  float4x4 modelViewProjectionMatrix;
+};
+
+vertex Vertex vertex_project(device Vertex *vertices [[buffer(0)]],
+                             constant Uniforms *uniforms [[buffer(1)]],
+                             uint vid [[vertex_id]])
+{
+  Vertex vertexOut;
+  vertexOut.position = uniforms->modelViewProjectionMatrix * vertices[vid].position;
+  vertexOut.color = vertices[vid].color;
+  
+  return vertexOut;
 }
 
-fragment float4 fragment_main(Vertex inVertex [[stage_in]])
+fragment half4 fragment_flatcolor(Vertex vertexIn [[stage_in]])
 {
-  return inVertex.color;
+  return half4(vertexIn.color);
 }
