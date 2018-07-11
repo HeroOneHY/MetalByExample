@@ -12,6 +12,7 @@
 #import "MBEOBJGroup.h"
 #import "MBEOBJMesh.h"
 #import "MBETypes.h"
+#import "MBETextureLoader.h"
 @import Metal;
 @import simd;
 
@@ -20,11 +21,13 @@ static const NSInteger MBEInFlightBufferCount = 3;
 @interface MBERenderer ()
 
 @property (nonatomic, strong) id<MTLDevice> device;
+@property (nonatomic, strong) id<MTLTexture> diffuseTexture;
 @property (nonatomic, strong) MBEMesh *mesh;
 @property (nonatomic, strong) id<MTLBuffer> uniformBuffer;
 @property (nonatomic, strong) id<MTLRenderPipelineState> pipeline;
 @property (nonatomic, strong) id<MTLCommandQueue> commandQueue;
 @property (nonatomic, strong) id<MTLDepthStencilState> depthStencilState;
+@property (nonatomic, strong) id<MTLSamplerState> samplerState;
 @property (nonatomic, strong) dispatch_semaphore_t displaySemaphore;
 @property (nonatomic, assign) float rotationX, rotationY, time;
 @property (nonatomic, assign) NSInteger bufferIndex;
@@ -38,8 +41,8 @@ static const NSInteger MBEInFlightBufferCount = 3;
   if (self) {
     [self makeDevice];
     _displaySemaphore = dispatch_semaphore_create(MBEInFlightBufferCount);
-    [self makeResources];
     [self makePipeline];
+    [self makeResources];
   }
   return self;
 }
@@ -97,6 +100,9 @@ static const NSInteger MBEInFlightBufferCount = 3;
 
   [renderPass setVertexBuffer:self.mesh.vertexBuffer offset:0 atIndex:0];
   
+  [renderPass setFragmentTexture:self.diffuseTexture atIndex:0];
+  [renderPass setFragmentSamplerState:self.samplerState atIndex:0];
+  
   [renderPass drawIndexedPrimitives:MTLPrimitiveTypeTriangle
                          indexCount:[self.mesh.indexBuffer length] / sizeof(MBEIndex)
                           indexType:MBEIndexType
@@ -120,19 +126,30 @@ static const NSInteger MBEInFlightBufferCount = 3;
 }
 
 - (void)makeResources {
-  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"teapot" withExtension:@"obj"];
+  MBETextureLoader *textureLoader = [MBETextureLoader new];
+  self.diffuseTexture = [textureLoader texture2DWithImageNamed:@"spot_texture" mipmapped:YES commandQueue:self.commandQueue];
+  
+  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"spot" withExtension:@"obj"];
   MBEOBJModel *model = [[MBEOBJModel alloc] initWithContentsOfURL:modelURL generateNormals:YES];
-  MBEOBJGroup *group = [model groupForName:@"teapot"];
+  MBEOBJGroup *group = [model groupForName:@"spot"];
   self.mesh = [[MBEOBJMesh alloc] initWithGroup:group device:self.device];
   self.uniformBuffer = [self.device newBufferWithLength:sizeof(MBEUniforms) * MBEInFlightBufferCount
                                                 options:MTLResourceOptionCPUCacheModeDefault];
   self.uniformBuffer.label = @"Uniforms";
+  
+  MTLSamplerDescriptor *samplerDesc = [MTLSamplerDescriptor new];
+  samplerDesc.sAddressMode = MTLSamplerAddressModeClampToEdge;
+  samplerDesc.tAddressMode = MTLSamplerAddressModeClampToEdge;
+  samplerDesc.minFilter = MTLSamplerMinMagFilterNearest;
+  samplerDesc.magFilter = MTLSamplerMinMagFilterLinear;
+  samplerDesc.mipFilter = MTLSamplerMipFilterLinear;
+  self.samplerState = [self.device newSamplerStateWithDescriptor:samplerDesc];
 }
 
 - (void)makePipeline {
   id<MTLLibrary> library = [self.device newDefaultLibrary];
   id<MTLFunction> vertexFunc = [library newFunctionWithName:@"vertex_project"];
-  id<MTLFunction> fragmentFunc = [library newFunctionWithName:@"fragment_light"];
+  id<MTLFunction> fragmentFunc = [library newFunctionWithName:@"fragment_texture"];
   
   MTLRenderPipelineDescriptor *pipelineDescriptor = [MTLRenderPipelineDescriptor new];
   pipelineDescriptor.vertexFunction = vertexFunc;

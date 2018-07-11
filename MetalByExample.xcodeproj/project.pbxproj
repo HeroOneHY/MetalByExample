@@ -17,11 +17,19 @@
 		402C461220F4C4A10093412B /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 402C461120F4C4A10093412B /* Shaders.metal */; };
 		402C461720F4C8990093412B /* MBEMathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C461320F4C8990093412B /* MBEMathUtilities.m */; };
 		402C461820F4C8990093412B /* MBERenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C461620F4C8990093412B /* MBERenderer.m */; };
-		402C462320F4E6FE0093412B /* teapot.obj in Resources */ = {isa = PBXBuildFile; fileRef = 402C461A20F4E6FD0093412B /* teapot.obj */; };
 		402C462420F4E6FE0093412B /* MBEOBJMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C461D20F4E6FD0093412B /* MBEOBJMesh.m */; };
 		402C462520F4E6FE0093412B /* MBEOBJGroup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 402C461E20F4E6FD0093412B /* MBEOBJGroup.mm */; };
 		402C462620F4E6FE0093412B /* MBEMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C461F20F4E6FD0093412B /* MBEMesh.m */; };
 		402C462720F4E6FE0093412B /* MBEOBJModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 402C462220F4E6FD0093412B /* MBEOBJModel.mm */; };
+		402C463320F4EDE50093412B /* spot_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 402C462A20F4EDE40093412B /* spot_texture.png */; };
+		402C463420F4EDE50093412B /* spot_texture.svg in Resources */ = {isa = PBXBuildFile; fileRef = 402C462B20F4EDE40093412B /* spot_texture.svg */; };
+		402C463520F4EDE50093412B /* spot.obj in Resources */ = {isa = PBXBuildFile; fileRef = 402C462C20F4EDE40093412B /* spot.obj */; };
+		402C463620F4EDE50093412B /* moo.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 402C462D20F4EDE40093412B /* moo.aiff */; };
+		402C463720F4EDE50093412B /* spot_quadrangulated.obj in Resources */ = {isa = PBXBuildFile; fileRef = 402C462E20F4EDE40093412B /* spot_quadrangulated.obj */; };
+		402C463820F4EDE50093412B /* spot_control_mesh.obj in Resources */ = {isa = PBXBuildFile; fileRef = 402C462F20F4EDE40093412B /* spot_control_mesh.obj */; };
+		402C463920F4EDE50093412B /* spot_triangulated.obj in Resources */ = {isa = PBXBuildFile; fileRef = 402C463020F4EDE40093412B /* spot_triangulated.obj */; };
+		402C463A20F4EDE50093412B /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 402C463120F4EDE40093412B /* README.txt */; };
+		402C463B20F4EDE50093412B /* MBETextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 402C463220F4EDE40093412B /* MBETextureLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +51,6 @@
 		402C461520F4C8990093412B /* MBEMathUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEMathUtilities.h; sourceTree = "<group>"; };
 		402C461620F4C8990093412B /* MBERenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBERenderer.m; sourceTree = "<group>"; };
 		402C461920F4E6FC0093412B /* MBEOBJGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEOBJGroup.h; sourceTree = "<group>"; };
-		402C461A20F4E6FD0093412B /* teapot.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = teapot.obj; sourceTree = "<group>"; };
 		402C461B20F4E6FD0093412B /* MBEOBJMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEOBJMesh.h; sourceTree = "<group>"; };
 		402C461C20F4E6FD0093412B /* MBEOBJModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEOBJModel.h; sourceTree = "<group>"; };
 		402C461D20F4E6FD0093412B /* MBEOBJMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBEOBJMesh.m; sourceTree = "<group>"; };
@@ -52,6 +59,16 @@
 		402C462020F4E6FD0093412B /* MBEMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBEMesh.h; sourceTree = "<group>"; };
 		402C462120F4E6FD0093412B /* MBETypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBETypes.h; sourceTree = "<group>"; };
 		402C462220F4E6FD0093412B /* MBEOBJModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MBEOBJModel.mm; sourceTree = "<group>"; };
+		402C462820F4EDE40093412B /* MBETextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBETextureLoader.h; sourceTree = "<group>"; };
+		402C462A20F4EDE40093412B /* spot_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spot_texture.png; sourceTree = "<group>"; };
+		402C462B20F4EDE40093412B /* spot_texture.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = spot_texture.svg; sourceTree = "<group>"; };
+		402C462C20F4EDE40093412B /* spot.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spot.obj; sourceTree = "<group>"; };
+		402C462D20F4EDE40093412B /* moo.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = moo.aiff; sourceTree = "<group>"; };
+		402C462E20F4EDE40093412B /* spot_quadrangulated.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spot_quadrangulated.obj; sourceTree = "<group>"; };
+		402C462F20F4EDE40093412B /* spot_control_mesh.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spot_control_mesh.obj; sourceTree = "<group>"; };
+		402C463020F4EDE40093412B /* spot_triangulated.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spot_triangulated.obj; sourceTree = "<group>"; };
+		402C463120F4EDE40093412B /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		402C463220F4EDE40093412B /* MBETextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBETextureLoader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +101,9 @@
 		402C45EF20F4AA3D0093412B /* MetalByExample */ = {
 			isa = PBXGroup;
 			children = (
+				402C462820F4EDE40093412B /* MBETextureLoader.h */,
+				402C463220F4EDE40093412B /* MBETextureLoader.m */,
+				402C462920F4EDE40093412B /* spot */,
 				402C462020F4E6FD0093412B /* MBEMesh.h */,
 				402C461F20F4E6FD0093412B /* MBEMesh.m */,
 				402C461920F4E6FC0093412B /* MBEOBJGroup.h */,
@@ -93,7 +113,6 @@
 				402C461C20F4E6FD0093412B /* MBEOBJModel.h */,
 				402C462220F4E6FD0093412B /* MBEOBJModel.mm */,
 				402C462120F4E6FD0093412B /* MBETypes.h */,
-				402C461A20F4E6FD0093412B /* teapot.obj */,
 				402C461520F4C8990093412B /* MBEMathUtilities.h */,
 				402C461320F4C8990093412B /* MBEMathUtilities.m */,
 				402C461420F4C8990093412B /* MBERenderer.h */,
@@ -112,6 +131,21 @@
 				402C45FF20F4AA3E0093412B /* main.m */,
 			);
 			path = MetalByExample;
+			sourceTree = "<group>";
+		};
+		402C462920F4EDE40093412B /* spot */ = {
+			isa = PBXGroup;
+			children = (
+				402C462A20F4EDE40093412B /* spot_texture.png */,
+				402C462B20F4EDE40093412B /* spot_texture.svg */,
+				402C462C20F4EDE40093412B /* spot.obj */,
+				402C462D20F4EDE40093412B /* moo.aiff */,
+				402C462E20F4EDE40093412B /* spot_quadrangulated.obj */,
+				402C462F20F4EDE40093412B /* spot_control_mesh.obj */,
+				402C463020F4EDE40093412B /* spot_triangulated.obj */,
+				402C463120F4EDE40093412B /* README.txt */,
+			);
+			path = spot;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,10 +205,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				402C462320F4E6FE0093412B /* teapot.obj in Resources */,
+				402C463720F4EDE50093412B /* spot_quadrangulated.obj in Resources */,
+				402C463520F4EDE50093412B /* spot.obj in Resources */,
+				402C463320F4EDE50093412B /* spot_texture.png in Resources */,
+				402C463420F4EDE50093412B /* spot_texture.svg in Resources */,
 				402C45FD20F4AA3E0093412B /* LaunchScreen.storyboard in Resources */,
+				402C463820F4EDE50093412B /* spot_control_mesh.obj in Resources */,
 				402C45FA20F4AA3E0093412B /* Assets.xcassets in Resources */,
 				402C45F820F4AA3D0093412B /* Main.storyboard in Resources */,
+				402C463620F4EDE50093412B /* moo.aiff in Resources */,
+				402C463A20F4EDE50093412B /* README.txt in Resources */,
+				402C463920F4EDE50093412B /* spot_triangulated.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +231,7 @@
 				402C460020F4AA3E0093412B /* main.m in Sources */,
 				402C462420F4E6FE0093412B /* MBEOBJMesh.m in Sources */,
 				402C462720F4E6FE0093412B /* MBEOBJModel.mm in Sources */,
+				402C463B20F4EDE50093412B /* MBETextureLoader.m in Sources */,
 				402C45F220F4AA3D0093412B /* AppDelegate.m in Sources */,
 				402C462520F4E6FE0093412B /* MBEOBJGroup.mm in Sources */,
 				402C461820F4C8990093412B /* MBERenderer.m in Sources */,
