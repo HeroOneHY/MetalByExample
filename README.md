@@ -3,4 +3,3 @@
 3. [Metal 示例之画 3D](http://blog.danthought.com/programming/2018/07/03/metal-by-example-3d/)
 4. [Metal 示例之光照](http://blog.danthought.com/programming/2018/07/04/metal-by-example-lighting/)
 5. [Metal 示例之纹理](http://blog.danthought.com/programming/2018/07/05/metal-by-example-texture/)
-6. [Metal 示例之 Mipmap](http://blog.danthought.com/programming/2018/07/06/metal-by-example-mipmap/)
